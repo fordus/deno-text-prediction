@@ -29,10 +29,21 @@ app.post("/api/completion", async (c) => {
     body: JSON.stringify({ text }),
   }).then((res) => res.json()).then((res) => res.predictions[0].text);
 
+  if (suggestedSentence.response == null || suggestedSentence.response == "") {
+    return c.json({
+      "predictions": [
+        {
+          "text": " ",
+        }
+      ]
+    });
+  }
+
+
   return c.json({
     "predictions": [
       {
-        "text": suggestedSentence.response
+        "text": suggestedSentence.response,
       }
     ]
   });
