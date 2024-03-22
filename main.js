@@ -16,7 +16,7 @@ app.post("/api/completion", async (c) => {
     return c.json({
       "predictions": [
         {
-          "text": " ",
+          "text": "",
         }
       ]
     });
