@@ -10,6 +10,17 @@ app.post("/api/completion", async (c) => {
   const { text } = await c.req.json()
   console.log(text);
 
+  //check if text is empty or white spaces 
+  if (text == null || text.trim() == "") {
+    return c.json({
+      "predictions": [
+        {
+          "text": " ",
+        }
+      ]
+    });
+  }
+
   // const suggestedSentence = await getSuggestion(text);
 
   //response from cloud function https://worker-floral-silence-5eb8.tres.workers.dev/
