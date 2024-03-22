@@ -9,9 +9,10 @@ app.use("/api/*", cors());
 app.post("/api/completion", async (c) => {
   const { text } = await c.req.json()
   console.log(text);
+  const suggestedWords = await getSuggestion(text);
 
   //check if text is empty or white spaces 
-  if (text == null || text.trim() == "") {
+  if (text == null || text.trim() == "" || suggestedWords == null || suggestedWords == "") {
     return c.json({
       "predictions": [
         {
@@ -20,6 +21,7 @@ app.post("/api/completion", async (c) => {
       ]
     });
   }
+
 
   // const suggestedSentence = await getSuggestion(text);
 
