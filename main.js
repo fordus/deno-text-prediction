@@ -39,6 +39,9 @@ app.post("/api/completion", async (c) => {
     });
   }
 
+  if (suggestedSentence.response.startsWith(text)) {
+    suggestedSentence.response = suggestedSentence.response.slice(text.length);
+  }
 
   return c.json({
     "predictions": [
