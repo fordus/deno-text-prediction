@@ -1,26 +1,26 @@
-import { Hono } from "https://deno.land/x/hono@v3.11.7/mod.ts";
-import { cors } from "https://deno.land/x/hono@v4.1.1/middleware.ts";
+import { Hono } from 'https://deno.land/x/hono@v3.11.7/mod.ts'
+import { cors } from 'https://deno.land/x/hono@v4.1.1/middleware.ts'
 // import { getSuggestion } from "./services/getSuggestion.js";
 
-const app = new Hono();
+const app = new Hono()
 
-app.use("/api/*", cors());
+app.use('/api/*', cors())
 
-app.post("/api/completion", async (c) => {
+app.post('/api/completion', async c => {
   const { text } = await c.req.json()
-  console.log(text);
+  const { type } = await c.req.json()
+  console.log(text)
 
-  //check if text is empty or white spaces 
-  if (text == null || text.trim() == "") {
+  //check if text is empty or white spaces
+  if (text == null || text.trim() == '') {
     return c.json({
-      "predictions": [
+      predictions: [
         {
-          "text": " ",
+          text: ' '
         }
       ]
-    });
+    })
   }
-
 
   // const suggestedSentence = await getSuggestion(text);
 
@@ -33,35 +33,40 @@ app.post("/api/completion", async (c) => {
   //   ]
   // }));
 
-  const suggestedSentence = await fetch("https://worker-floral-silence-5eb8.tres.workers.dev/", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ text }),
-  }).then((res) => res.json()).then((res) => res.predictions[0].text);
+  const suggestedSentence = await fetch(
+    'https://worker-floral-silence-5eb8.tres.workers.dev/',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text, type })
+    }
+  )
+    .then(res => res.json())
+    .then(res => res.predictions[0].text)
 
-  if (suggestedSentence.response == null || suggestedSentence.response == "") {
+  if (suggestedSentence.response == null || suggestedSentence.response == '') {
     return c.json({
-      "predictions": [
+      predictions: [
         {
-          "text": " ",
+          text: ' '
         }
       ]
-    });
+    })
   }
 
   if (suggestedSentence.response.startsWith(text)) {
-    suggestedSentence.response = suggestedSentence.response.slice(text.length);
+    suggestedSentence.response = suggestedSentence.response.slice(text.length)
   }
 
   return c.json({
-    "predictions": [
+    predictions: [
       {
-        "text": suggestedSentence.response,
+        text: suggestedSentence.response
       }
     ]
-  });
-});
+  })
+})
 
-Deno.serve(app.fetch);
+Deno.serve(app.fetch)
