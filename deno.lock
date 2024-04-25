@@ -1,7 +1,8 @@
 {
   "version": "3",
   "redirects": {
-    "https://deno.land/x/hono/middleware.ts": "https://deno.land/x/hono@v4.1.1/middleware.ts"
+    "https://deno.land/x/hono/middleware.ts": "https://deno.land/x/hono@v4.1.1/middleware.ts",
+    "https://deno.land/x/tensorflow/tf.js": "https://deno.land/x/tensorflow@v0.21/tf.js"
   },
   "remote": {
     "https://deno.land/x/hono@v3.11.7/client/client.ts": "ff340f58041203879972dd368b011ed130c66914f789826610869a90603406bf",
@@ -86,6 +87,7 @@
     "https://deno.land/x/hono@v4.1.1/utils/jwt/jwt.ts": "02ff7bbf1298ffcc7a40266842f8eac44b6c136453e32d4441e24d0cbfba3a95",
     "https://deno.land/x/hono@v4.1.1/utils/jwt/types.ts": "1dd79fce49dcaf54511d9bca88f5ae508cef577225aa581c811b248dc9c7a121",
     "https://deno.land/x/hono@v4.1.1/utils/mime.ts": "1e5db0919d2127995ec466dfd1ee637c3d63084f516ccbd3c6906ccf0d3f3c46",
-    "https://deno.land/x/hono@v4.1.1/utils/url.ts": "d9d307a495e7dfc6e916fbcfa74c2d8d23e8e685bddc5e6ebc9c0f784345a01a"
+    "https://deno.land/x/hono@v4.1.1/utils/url.ts": "d9d307a495e7dfc6e916fbcfa74c2d8d23e8e685bddc5e6ebc9c0f784345a01a",
+    "https://deno.land/x/tensorflow@v0.21/tf.js": "797734a35a93f20c2fc18ef58fcf1a91740d00134802fa58951a3fbc8c3baf1e"
   }
 }

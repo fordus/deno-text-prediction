@@ -1,10 +1,20 @@
 import { Hono } from 'https://deno.land/x/hono@v3.11.7/mod.ts'
 import { cors } from 'https://deno.land/x/hono@v4.1.1/middleware.ts'
 // import { getSuggestion } from "./services/getSuggestion.js";
+import { predict } from "./services/predict.js";
 
 const app = new Hono()
 
 app.use('/api/*', cors())
+
+app.post('/api/predict', async c => {
+ const { text } = await c.req.json()
+ console.log(text)
+ const prediction = await predict(text)
+ return c.json({
+        text: prediction
+  })
+})
 
 app.post('/api/completion', async c => {
   const { text } = await c.req.json()
