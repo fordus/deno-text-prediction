@@ -1,5 +1,5 @@
 ### get new text suggestions
-POST http://localhost:8000/api/completion
+POST http://localhost:3000/api/completion
 Content-Type: application/json
 
 {
@@ -7,7 +7,7 @@ Content-Type: application/json
 }
 
 ### get new completion
-POST http://localhost:8000/api/predict
+POST http://localhost:3000/api/predict
 Content-Type: application/json
 
 {

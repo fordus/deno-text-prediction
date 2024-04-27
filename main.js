@@ -1,18 +1,38 @@
 import { Hono } from 'https://deno.land/x/hono@v3.11.7/mod.ts'
 import { cors } from 'https://deno.land/x/hono@v4.1.1/middleware.ts'
 // import { getSuggestion } from "./services/getSuggestion.js";
-import { predict } from "./services/predict.js";
 
 const app = new Hono()
 
 app.use('/api/*', cors())
 
 app.post('/api/predict', async c => {
- const { text } = await c.req.json()
- console.log(text)
- const prediction = await predict(text)
- return c.json({
-        text: prediction
+  const { text } = await c.req.json()
+  if (text == null || text.trim() == '') {
+    return c.json({
+      text: ''
+    })
+  }
+
+  let prediction = await fetch(
+    'https://text-prediction-nextjs.vercel.app/api',
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text })
+    }
+  )
+    .then(res => res.json())
+    .then(res => res.text)
+
+  if (prediction.startsWith(text)) {
+    prediction = prediction.slice(text.length)
+  }
+
+  return c.json({
+    text: prediction
   })
 })
 
