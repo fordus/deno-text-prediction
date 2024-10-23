@@ -1,6 +1,6 @@
 import { Hono } from 'https://deno.land/x/hono@v3.11.7/mod.ts'
 import { cors } from 'https://deno.land/x/hono@v4.1.1/middleware.ts'
-// import { getSuggestion } from "./services/getSuggestion.js";
+
 
 const app = new Hono()
 
